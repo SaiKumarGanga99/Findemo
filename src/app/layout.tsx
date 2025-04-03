@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-// Load Geist and Geist Mono fonts
+// ✅ Add this import
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+// Load fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,12 +16,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Metadata including favicon
+// SEO + Favicon
 export const metadata: Metadata = {
   title: "Fintec - Fund Your Business",
   description: "Fast, flexible financing powered by Fintec.",
   icons: {
-    icon: "/logos/favicon.ico", // Ensure this file exists in /public/logos/
+    icon: "/logos/favicon.ico",
   },
 };
 
@@ -33,6 +36,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       >
         {children}
+
+        {/* ✅ Vercel Performance Insights */}
+        <SpeedInsights />
       </body>
     </html>
   );
