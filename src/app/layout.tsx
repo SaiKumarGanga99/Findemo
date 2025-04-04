@@ -18,11 +18,11 @@ const geistMono = Geist_Mono({
 
 // SEO + Favicon
 export const metadata: Metadata = {
-  title: "Fintec - Fund Your Business",
+  title: "Findgm - Fund Your Business",
   description: "Fast, flexible financing powered by Fintec.",
-  icons: {
-    icon: "/logos/favicon.ico",
-  },
+  //icons: {
+    //icon: "/logos/favicon.ico",
+  //},
 };
 
 export default function RootLayout({
