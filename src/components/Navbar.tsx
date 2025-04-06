@@ -85,7 +85,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Icon + Apply */}
         <div className="md:hidden flex items-center gap-2 pr-2">
-            <Link href="/singup">
+            <Link href="/signup">
           <button className="px-4 py-1.5 rounded-full bg-[#FFB347] text-white text-sm font-medium">
             Apply
           </button>
