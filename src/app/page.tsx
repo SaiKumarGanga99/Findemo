@@ -10,12 +10,15 @@ import LogoBar from "@/components/LogoBar";
 //import ProductHighlights from "@/components/ProductHighlights";
 import EligibilityAndPricing from "@/components/EligibilityAndPricing";
 import Testimonials from "@/components/Testimonials";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar"; // <-- Import new Navbar component
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    //<main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
+
       {/* Sticky Navbar */}
       <Navbar />
 
@@ -24,10 +27,12 @@ export default function Home() {
         <Hero />
         {/*<HowItWorks />*/}
         <WhyFindigmWorks />
-        <ImpactMetrics />
-        <LogoBar />
         <EligibilityAndPricing />
+        
+        <LogoBar />
+       
         <Testimonials />
+        <MeetTheTeam />
         <Footer />
       </div>
     </main>

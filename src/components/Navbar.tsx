@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Link from "next/link";
 
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700"] });
 
@@ -47,7 +48,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
         {/* Logo - Styled as text logo like deel.com */}
         <div className="flex items-center h-12">
-          <span className={`text-2xl font-bold tracking-tight text-gray-900 ${plusJakarta.className}`}>Findigm</span>
+        <span className={`text-3xl font-extrabold tracking-tighter text-gray-900 ${plusJakarta.className}`}> findigm
+        </span>
         </div>
 
         {/* Desktop Nav */}
@@ -67,21 +69,27 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Buttons */}
+        {/* Buttons */} 
         <div className="hidden md:flex gap-4">
-          <button className="px-4 py-1.5 rounded-full border border-gray-300 text-sm text-gray-800 hover:bg-gray-100 transition">
-            Log in
+            <Link href ="/signin">
+          <button className="px-4 py-1.5 rounded-full border border-gray-300 text-sm text-gray-800 hover:bg-gray-100 transition cursor-pointer">
+            Sign In
           </button>
-          <button className="px-4 py-1.5 rounded-full bg-[#E07A5F] text-white text-sm hover:bg-[#d26b52] transition">
+          </Link>
+          <button className="px-4 py-1.5 rounded-full bg-[#FFB347] text-black text-sm hover:bg-[#FFB347] transition cursor-pointer">
+              <Link href ="/signup">
             Apply
+            </Link>
           </button>
         </div>
 
         {/* Mobile Menu Icon + Apply */}
         <div className="md:hidden flex items-center gap-2 pr-2">
-          <button className="px-4 py-1.5 rounded-full bg-[#E07A5F] text-white text-sm font-medium">
+            <Link href="/singup">
+          <button className="px-4 py-1.5 rounded-full bg-[#FFB347] text-white text-sm font-medium">
             Apply
           </button>
+          </Link>
           <button
             className="p-2 text-gray-800"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -98,19 +106,23 @@ export default function Navbar() {
             <a
               key={name}
               href={href}
-              className="block text-gray-800 text-sm hover:text-[#F97316]"
+              className="block text-gray-800 text-sm hover:text-[#FFB347]"
               onClick={() => setMenuOpen(false)}
             >
               {name}
             </a>
           ))}
           <div className="pt-4 border-t border-gray-200">
-            <button className="w-full text-left py-2 text-gray-800 hover:text-[#F97316]">
+              <Link href="/signin">
+            <button className="w-full text-left py-2 text-gray-800 hover:text-[#FFB347]">
               Log-in
             </button>
-            <button className="w-full text-left py-2 text-white bg-[#E07A5F] rounded-md mt-2">
+            </Link>
+            <Link href ="/signup">
+            <button className="w-full text-left py-2 text-white bg-[#FFB347] rounded-md mt-2">
               Apply
             </button>
+            </Link>
           </div>
         </div>
       )}

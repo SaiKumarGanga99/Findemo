@@ -37,7 +37,7 @@ const fadeVariants = {
 
 export default function Testimonials() {
   return (
-    <section className="bg-orange-50 py-28 px-6">
+    <section className="bg-50 py-28 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-black mb-4">
           What our customers are saying

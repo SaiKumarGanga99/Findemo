@@ -1,159 +1,119 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle } from "lucide-react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Slider } from "@/components/ui/slider";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700"] });
 
-const FEE_RATE = 0.0466;
+export default function InvoiceCalculator() {
+  const [turnover, setTurnover] = useState<number | null>(null);
+  const [days, setDays] = useState(120);
+  const advanceRate = 95;
 
-export default function EligibilityAndPricing() {
-  const [amount, setAmount] = useState(0);
-  const [termWeeks, setTermWeeks] = useState<12 | 24>(12);
-  const [showResult, setShowResult] = useState(false);
+  const estimatedAdvance = turnover
+    ? (turnover * (days / 365) * (advanceRate / 100)).toFixed(2)
+    : null;
 
-  const totalFee = amount * FEE_RATE;
-  const totalRepayment = amount + totalFee;
-  const weeklyPayment = (totalRepayment / termWeeks).toFixed(2);
-  const feePerWeek = (totalFee / termWeeks).toFixed(2);
-  const principalPerWeek = (amount / termWeeks).toFixed(2);
+  const handleTurnoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setTurnover(isNaN(value) ? null : value);
+  };
 
   return (
-    <section className="bg-white py-36 px-6">
-      <div className={`max-w-7xl mx-auto space-y-16 ${plusJakarta.className}`}>
-        {/* ✅ Section Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Eligibility & Pricing</h2>
-          <p className="text-gray-600 text-lg max-w-xl mx-auto">
-            Check if you qualify and preview transparent pricing before you apply.
-          </p>
-        </motion.div>
+    <section className="bg-white py-28 px-6">
+      <div className={`max-w-5xl mx-auto text-center mb-16 ${plusJakarta.className}`}> 
+        <h2 className="text-4xl font-bold text-black mb-4">Explore Your Cash Potential</h2>
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          Use our invoice finance calculator to discover how much capital you can unlock based on your unpaid invoices.
+        </p>
+      </div>
 
-        {/* ✅ Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-10 items-center">
-          {/* ✅ Left Column - 40% */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className={`max-w-5xl mx-auto flex flex-col items-center ${plusJakarta.className}`}
+      >
+        <div className="w-full md:w-[70%] bg-white border-2 border-orange-300 rounded-3xl shadow-2xl p-8 md:p-12 space-y-8">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="md:col-span-4 space-y-6"
+            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="space-y-3"
           >
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl font-bold text-black"
-            >
-              Do I qualify?
-            </motion.h3>
-            <ul className="space-y-5 text-lg">
-              {["$30,000+ in annual revenue", "Business checking account", "Ideally 3+ months in business"].map((text, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle className="text-orange-500 w-6 h-6 mt-1" />
-                  <span className="text-gray-800">{text}</span>
-                </li>
-              ))}
-            </ul>
+            <label className="text-sm font-semibold text-gray-800">
+              What is your average yearly turnover (in USD)?
+            </label>
+            <input
+              type="number"
+              placeholder="$"
+              value={turnover ?? ""}
+              onChange={handleTurnoverChange}
+              className="w-full text-lg px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+            {turnover === null && (
+              <p className="text-red-500 text-xs mt-1">Enter a valid number</p>
+            )}
           </motion.div>
 
-          {/* ✅ Right Column - 60% */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="md:col-span-6 bg-[#E07A5F] p-8 md:py-20 rounded-2xl space-y-6 shadow-lg text-white"
+            transition={{ delay: 0.3, duration: 0.5 }}
+            viewport={{ once: true }}
           >
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl font-bold"
-            >
-              How our pricing works
-            </motion.h3>
-
-            {/* Input and Button */}
-            <div className="flex gap-2">
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(Number(e.target.value))}
-                className="px-4 py-3 rounded-md w-full shadow-sm border border-gray-300 text-black focus:outline-none"
-              />
-              <motion.button
-                whileTap={{ scale: 0.97 }}
-                onClick={() => setShowResult(true)}
-                className="bg-black text-white px-5 py-3 rounded-md text-sm font-medium hover:bg-gray-900"
-              >
-                Calculate
-              </motion.button>
+            <label className="text-sm font-semibold text-gray-800 mb-2 block">
+              Average debtor payment terms
+            </label>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">0 Days</span>
+              <span className="text-sm text-gray-800 font-medium">{days} Days</span>
+              <span className="text-sm text-gray-600">120 Days</span>
             </div>
+            <Slider
+              defaultValue={[days]}
+              max={120}
+              step={1}
+              className="mt-2"
+              onValueChange={(val) => setDays(val[0])}
+            />
+          </motion.div>
 
-            {/* Tabs */}
-            <div className="flex gap-4 text-sm font-medium">
-              <button
-                className={`underline underline-offset-4 ${termWeeks === 12 ? "text-white" : "text-white/70"}`}
-                onClick={() => setTermWeeks(12)}
-              >
-                12 weeks
-              </button>
-              <button
-                className={`${termWeeks === 24 ? "text-white" : "text-white/70"}`}
-                onClick={() => setTermWeeks(24)}
-              >
-                24 weeks
-              </button>
-            </div>
-
-            {/* Table */}
-            {showResult && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="bg-white text-black rounded-xl shadow p-4 overflow-x-auto"
-              >
-                <table className="w-full text-sm text-left">
-                  <thead className="border-b font-semibold">
-                    <tr>
-                      <th className="py-2">Week</th>
-                      <th className="py-2">Principal</th>
-                      <th className="py-2">Fees</th>
-                      <th className="py-2">Total / week</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b">
-                      <td className="py-2">All Weeks</td>
-                      <td className="py-2">${principalPerWeek}</td>
-                      <td className="py-2">${feePerWeek}</td>
-                      <td className="py-2">${weeklyPayment}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="pt-6 border-t mt-4"
+          >
+            {estimatedAdvance !== null && (
+              <>
+                <p className="text-sm text-gray-800 font-medium mb-1">You could access up to</p>
+                <h3 className="text-4xl font-bold text-black">${estimatedAdvance}</h3>
+              </>
             )}
-
-            {showResult && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="text-xs text-white/80"
-              >
-                * Based on a 4.66% fee. Terms and fees may vary depending on selected term.
-              </motion.p>
-            )}
+            <p className="text-xs text-gray-600 mt-2">
+              Based on a {days} day repayment term and a {advanceRate}% advance rate. This is an estimated value only and not a financing offer.
+            </p>
           </motion.div>
         </div>
-      </div>
+
+        <div className="text-center mt-12">
+          <p className="text-md text-gray-800 mb-4">
+            Interested in getting started with invoice financing?
+          </p>
+          <Link href="/signup">
+            <button className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-900 transition cursor-pointer">
+              Sign Up Now
+            </button>
+          </Link>
+        </div>
+      </motion.div>
     </section>
   );
 }

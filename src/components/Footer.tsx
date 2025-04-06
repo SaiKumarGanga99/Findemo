@@ -5,7 +5,7 @@ import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin, Youtube } 
 
 export default function Footer() {
   return (
-    <footer className="bg-[#E07A5F] py-16 px-6 text-sm text-black">
+    <footer className="bg-[#FFC160] py-16 px-6 text-sm text-black">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-center md:text-left">
         {/* Brand */}
         <div>

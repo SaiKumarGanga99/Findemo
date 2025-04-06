@@ -79,7 +79,7 @@ export default function ImpactMetrics() {
                 initial={{ width: 0 }}
                 animate={visibleIndexes.includes(i) ? { width: item.progress } : {}}
                 transition={{ delay: 0.2, duration: 3, ease: "easeOut" }}
-                className="absolute top-0 left-0 h-full bg-[#E07A5F] rounded-xl z-0"
+                className="absolute top-0 left-0 h-full bg-[#FFB347] rounded-xl z-0"
               ></motion.div>
               <div className="relative z-10 flex justify-between items-center h-full px-6">
                 <div className="text-left">

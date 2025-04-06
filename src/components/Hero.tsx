@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Link from "next/link";
 
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700"] });
 
@@ -10,7 +11,8 @@ export default function Hero() {
   return (
     <section
       className="relative text-black px-4 overflow-hidden min-h-screen flex items-center"
-      style={{ backgroundColor: "#E07A5F" }}
+      //style={{ backgroundColor: "#E07A5F" "#FFBC40"}}
+      style={{ backgroundColor:"#FFC160"}}
     >
       {/* Decorative Background Shape */}
       <div className="absolute inset-0 overflow-hidden -z-10">
@@ -44,10 +46,12 @@ export default function Hero() {
             Unlock fast, compliant capital by turning your outstanding invoices into growth opportunities — without the wait.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button className="px-6 py-3 bg-black text-white hover:bg-gray-900 text-sm font-semibold">
+            <Link href = "/signup">
+            <Button className="px-6 py-3 bg-black text-white hover:bg-gray-900 text-sm font-semibold" >
               Get Started
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
+            </Link>
             <a href="#" className="text-sm font-medium underline text-black hover:text-black/80">
               Learn more
             </a>
