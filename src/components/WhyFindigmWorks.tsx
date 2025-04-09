@@ -53,29 +53,40 @@ const highlights = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[#fefaf6] py-28 px-6">
-      <div className={`max-w-6xl mx-auto text-center ${plusJakarta.className}`}>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">How Findigm Works</h2>
-        <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-          We make invoice financing fast, flexible, and painless. Here's what your journey looks like:
-        </p>
+    <section className="bg-[#FAF4EF] py-28 px-6">
+      <div className={`max-w-6xl mx-auto ${plusJakarta.className}`}>
+        {/* Heading Section */}
+        <div className="bg-[#FFC160] rounded-2xl px-6 md:px-16 py-16 text-left md:grid md:grid-cols-2 md:items-center md:gap-12">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+              Accelerate Your Growth with Flexible Invoice Financing
+            </h2>
+          </div>
+          <div>
+            <p className="text-black text-lg md:text-xl">
+              If you’re a growing business or freelancer looking for fast and flexible funding, Findigm offers a paperless, modern platform to unlock your cash flow instantly.
+            </p>
+          </div>
+        </div>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        {/* Steps Section */}
+        <div className="mt-20 flex flex-col items-center gap-16">
           {steps.map((step, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
+              transition={{ delay: index * 0.3, duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl p-6 shadow-md border-l-4 border-orange-400 relative"
+              className="bg-white w-full md:w-[60%] rounded-xl shadow-lg p-8 md:p-10 text-left border border-gray-200"
             >
-              <div className="absolute -left-4 top-6 w-8 h-8 bg-[#E07A5F] text-white rounded-full flex items-center justify-center font-bold">
-                {index + 1}
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <div className="text-3xl font-bold text-orange-500">{index + 1}.</div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
+                  <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 ml-6">{step.title}</h3>
-              <p className="text-gray-700 ml-6 text-sm leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>
@@ -86,9 +97,11 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-24 bg-white shadow-lg rounded-2xl border border-teal-700 px-6 md:px-12 py-14"
+          className="mt-28 bg-white shadow-lg rounded-2xl border border-teal-700 px-6 md:px-12 py-14"
         >
-          <h3 className="text-2xl font-bold text-gray-800 mb-12">Next-Gen Invoice Financing, Built for You</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-12 text-center md:text-left">
+            Next-Gen Invoice Financing, Built for You
+          </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {highlights.map((item, idx) => (

@@ -10,12 +10,13 @@ const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700
 
 export default function InvoiceCalculator() {
   const [turnover, setTurnover] = useState<number | null>(null);
-  const [days, setDays] = useState(120);
+  const [days, setDays] = useState(30);
   const advanceRate = 95;
 
-  const estimatedAdvance = turnover
-    ? (turnover * (days / 365) * (advanceRate / 100)).toFixed(2)
-    : null;
+  // New logic: 0.15% per 15 days → 0.01% per day
+  const percentageRate = (days * 0.001) / 10;
+  const estimatedAdvance =
+    turnover !== null ? (turnover * (1 - percentageRate) * (advanceRate / 100)).toFixed(2) : null;
 
   const handleTurnoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -27,7 +28,7 @@ export default function InvoiceCalculator() {
       <div className={`max-w-5xl mx-auto text-center mb-16 ${plusJakarta.className}`}> 
         <h2 className="text-4xl font-bold text-black mb-4">Explore Your Cash Potential</h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-          Use our invoice finance calculator to discover how much capital you can unlock based on your unpaid invoices.
+          Use our invoice finance calculator to discover how much capital you can unlock based on your unpaid invoices and repayment cycle.
         </p>
       </div>
 
@@ -68,16 +69,17 @@ export default function InvoiceCalculator() {
             viewport={{ once: true }}
           >
             <label className="text-sm font-semibold text-gray-800 mb-2 block">
-              Average debtor payment terms
+              Average debtor payment terms (in days):
             </label>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">0 Days</span>
+              <span className="text-sm text-gray-600">1 Day</span>
               <span className="text-sm text-gray-800 font-medium">{days} Days</span>
-              <span className="text-sm text-gray-600">120 Days</span>
+              <span className="text-sm text-gray-600">90 Days</span>
             </div>
             <Slider
               defaultValue={[days]}
-              max={120}
+              max={90}
+              min={1}
               step={1}
               className="mt-2"
               onValueChange={(val) => setDays(val[0])}
@@ -93,12 +95,14 @@ export default function InvoiceCalculator() {
           >
             {estimatedAdvance !== null && (
               <>
-                <p className="text-sm text-gray-800 font-medium mb-1">You could access up to</p>
+                <p className="text-sm text-gray-800 font-medium mb-1">
+                  Estimated advance you can access:
+                </p>
                 <h3 className="text-4xl font-bold text-black">${estimatedAdvance}</h3>
               </>
             )}
             <p className="text-xs text-gray-600 mt-2">
-              Based on a {days} day repayment term and a {advanceRate}% advance rate. This is an estimated value only and not a financing offer.
+              This estimate is based on a repayment period of {days} days, with an advance rate of {advanceRate}% and a proportional service charge of 0.15% every 15 days.
             </p>
           </motion.div>
         </div>
