@@ -13,7 +13,7 @@ export default function InvoiceCalculator() {
   const [days, setDays] = useState(30);
   const advanceRate = 95;
 
-  // New logic: 0.15% per 15 days → 0.01% per day
+  // 0.15% per 15 days → 0.01% per day (0.001)
   const percentageRate = days * 0.001;
   const estimatedAdvance =
     turnover !== null ? (turnover * (1 - percentageRate) * (advanceRate / 100)).toFixed(2) : null;
@@ -82,7 +82,6 @@ export default function InvoiceCalculator() {
               <Slider
                 defaultValue={[days]}
                 max={90}
-                min={1}
                 step={1}
                 className="mt-2"
                 onValueChange={(val) => setDays(val[0])}
