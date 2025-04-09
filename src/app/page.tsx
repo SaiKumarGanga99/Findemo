@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import ImpactMetrics from "@/components/ImpactMetrics";
 import WhyFindigmWorks from "@/components/WhyFindigmWorks";
-import LogoBar from "@/components/LogoBar";
+//import LogoBar from "@/components/LogoBar";
 //import ProductHighlights from "@/components/ProductHighlights";
 import EligibilityAndPricing from "@/components/EligibilityAndPricing";
 import Testimonials from "@/components/Testimonials";
@@ -29,7 +29,7 @@ export default function Home() {
         <WhyFindigmWorks />
         <EligibilityAndPricing />
         
-        <LogoBar />
+        
        
         <Testimonials />
         <MeetTheTeam />
